@@ -94,7 +94,7 @@ function clearLines() {
             grid.splice(row, 1);
             grid.unshift(new Array(COLS).fill(EMPTY));
             score += 10;
-            scoreDisplay.textContent = `Puntuación: ${score}`;
+            scoreDisplay.textContent = `Score: ${score}`;
         }
     }
 }
@@ -208,4 +208,5 @@ function endGame() {
 
 
 init();
+
 
