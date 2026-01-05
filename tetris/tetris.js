@@ -203,10 +203,11 @@ function checkCollision(piece) {
 
 function endGame() {
     clearInterval(gameInterval);
-    alert(`¡Juego terminado! Puntuación final: ${score}`);
+    alert(`¡Game ended! final score: ${score}`);
 }
 
 
 init();
+
 
 
