@@ -19,13 +19,11 @@ const PIECES = [
     { color: 'red', shape: [[1, 1, 1], [0, 0, 1]] }
 ];
 
-
 function init() {
     createGrid();
     resetGame();
     document.addEventListener('keydown', handleKeyPress);
 }
-
 
 function createGrid() {
     for (let row = 0; row < ROWS; row++) {
@@ -36,7 +34,6 @@ function createGrid() {
     }
 }
 
-
 function resetGame() {
     clearInterval(gameInterval);
     score = 0;
@@ -45,7 +42,6 @@ function resetGame() {
     spawnPiece();
     gameInterval = setInterval(updateGameArea, 500); 
 }
-
 
 function spawnPiece() {
     const randomPiece = PIECES[Math.floor(Math.random() * PIECES.length)];
@@ -65,7 +61,6 @@ function updateGameArea() {
     drawGrid();
 }
 
-
 function movePieceDown() {
     currentPiece.y++;
     if (checkCollision(currentPiece)) {
@@ -76,6 +71,21 @@ function movePieceDown() {
     }
 }
 
+// --- NEW HARD DROP FUNCTION ---
+function hardDrop() {
+    // Keep moving down until we hit a collision
+    while (!checkCollision(currentPiece)) {
+        currentPiece.y++;
+    }
+    // Step back one to the last valid position
+    currentPiece.y--;
+    
+    // Immediately lock the piece
+    placePiece();
+    clearLines();
+    spawnPiece();
+    drawGrid();
+}
 
 function placePiece() {
     currentPiece.shape.forEach((row, i) => {
@@ -87,7 +97,6 @@ function placePiece() {
     });
 }
 
-
 function clearLines() {
     for (let row = ROWS - 1; row >= 0; row--) {
         if (grid[row].every(cell => cell !== EMPTY)) {
@@ -98,7 +107,6 @@ function clearLines() {
         }
     }
 }
-
 
 function drawGrid() {
     gameArea.innerHTML = ''; 
@@ -116,7 +124,6 @@ function drawGrid() {
         });
     });
 
-
     currentPiece.shape.forEach((row, i) => {
         row.forEach((value, j) => {
             if (value) {
@@ -133,7 +140,7 @@ function drawGrid() {
     });
 }
 
-
+// --- UPDATED INPUT HANDLER ---
 function handleKeyPress(event) {
     switch (event.key) {
         case 'ArrowLeft':
@@ -148,9 +155,13 @@ function handleKeyPress(event) {
         case 'ArrowUp':
             rotatePiece();
             break;
+        case ' ': // Added Spacebar for Hard Drop
+            event.preventDefault(); // Prevents page from scrolling down
+            hardDrop();
+            break;
     }
+    drawGrid();
 }
-
 
 function movePieceLeft() {
     currentPiece.x--;
@@ -159,14 +170,12 @@ function movePieceLeft() {
     }
 }
 
-
 function movePieceRight() {
     currentPiece.x++;
     if (checkCollision(currentPiece)) {
         currentPiece.x--;
     }
 }
-
 
 function rotatePiece() {
     const originalShape = currentPiece.shape;
@@ -184,7 +193,6 @@ function rotatePiece() {
     }
 }
 
-
 function checkCollision(piece) {
     return piece.shape.some((row, i) => {
         return row.some((value, j) => {
@@ -200,14 +208,9 @@ function checkCollision(piece) {
     });
 }
 
-
 function endGame() {
     clearInterval(gameInterval);
-    alert(`¡Game ended! final score: ${score}`);
+    alert(`¡Game ended! Final score: ${score}`);
 }
 
-
 init();
-
-
-
