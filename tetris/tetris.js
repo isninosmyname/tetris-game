@@ -1,4 +1,3 @@
-// Constantes y variables globales
 const gameArea = document.getElementById('gameArea');
 const scoreDisplay = document.getElementById('score');
 const ROWS = 20;
@@ -10,7 +9,6 @@ let currentPiece;
 let score = 0;
 let gameInterval;
 
-// Definición de las piezas de Tetris
 const PIECES = [
     { color: 'cyan', shape: [[1, 1, 1, 1]] },
     { color: 'blue', shape: [[1, 1, 1], [0, 1, 0]] },
@@ -21,14 +19,14 @@ const PIECES = [
     { color: 'red', shape: [[1, 1, 1], [0, 0, 1]] }
 ];
 
-// Inicializar el juego
+
 function init() {
     createGrid();
     resetGame();
     document.addEventListener('keydown', handleKeyPress);
 }
 
-// Crear la cuadrícula del juego
+
 function createGrid() {
     for (let row = 0; row < ROWS; row++) {
         grid[row] = [];
@@ -38,17 +36,17 @@ function createGrid() {
     }
 }
 
-// Reiniciar el juego
+
 function resetGame() {
     clearInterval(gameInterval);
     score = 0;
     scoreDisplay.textContent = `Puntuación: ${score}`;
     grid.forEach(row => row.fill(EMPTY));
     spawnPiece();
-    gameInterval = setInterval(updateGameArea, 500); // Velocidad de actualización del juego
+    gameInterval = setInterval(updateGameArea, 500); 
 }
 
-// Generar una nueva pieza de Tetris aleatoria
+
 function spawnPiece() {
     const randomPiece = PIECES[Math.floor(Math.random() * PIECES.length)];
     currentPiece = {
@@ -62,13 +60,12 @@ function spawnPiece() {
     }
 }
 
-// Actualizar el área de juego
 function updateGameArea() {
     movePieceDown();
     drawGrid();
 }
 
-// Mover la pieza hacia abajo
+
 function movePieceDown() {
     currentPiece.y++;
     if (checkCollision(currentPiece)) {
@@ -79,7 +76,7 @@ function movePieceDown() {
     }
 }
 
-// Colocar la pieza en la cuadrícula
+
 function placePiece() {
     currentPiece.shape.forEach((row, i) => {
         row.forEach((value, j) => {
@@ -90,7 +87,7 @@ function placePiece() {
     });
 }
 
-// Borrar líneas completas de la cuadrícula
+
 function clearLines() {
     for (let row = ROWS - 1; row >= 0; row--) {
         if (grid[row].every(cell => cell !== EMPTY)) {
@@ -102,9 +99,9 @@ function clearLines() {
     }
 }
 
-// Dibujar la cuadrícula del juego
+
 function drawGrid() {
-    gameArea.innerHTML = ''; // Limpiar el área de juego
+    gameArea.innerHTML = ''; 
 
     grid.forEach((row, i) => {
         row.forEach((cell, j) => {
@@ -119,7 +116,7 @@ function drawGrid() {
         });
     });
 
-    // Dibujar la pieza actual
+
     currentPiece.shape.forEach((row, i) => {
         row.forEach((value, j) => {
             if (value) {
@@ -136,7 +133,7 @@ function drawGrid() {
     });
 }
 
-// Manejar la pulsación de teclas
+
 function handleKeyPress(event) {
     switch (event.key) {
         case 'ArrowLeft':
@@ -154,7 +151,7 @@ function handleKeyPress(event) {
     }
 }
 
-// Mover la pieza hacia la izquierda
+
 function movePieceLeft() {
     currentPiece.x--;
     if (checkCollision(currentPiece)) {
@@ -162,7 +159,7 @@ function movePieceLeft() {
     }
 }
 
-// Mover la pieza hacia la derecha
+
 function movePieceRight() {
     currentPiece.x++;
     if (checkCollision(currentPiece)) {
@@ -170,7 +167,7 @@ function movePieceRight() {
     }
 }
 
-// Rotar la pieza
+
 function rotatePiece() {
     const originalShape = currentPiece.shape;
     const newShape = [];
@@ -187,7 +184,7 @@ function rotatePiece() {
     }
 }
 
-// Verificar colisión de la pieza con los bordes o con otras piezas
+
 function checkCollision(piece) {
     return piece.shape.some((row, i) => {
         return row.some((value, j) => {
@@ -203,11 +200,12 @@ function checkCollision(piece) {
     });
 }
 
-// Finalizar el juego
+
 function endGame() {
     clearInterval(gameInterval);
     alert(`¡Juego terminado! Puntuación final: ${score}`);
 }
 
-// Iniciar el juego al cargar la página
+
 init();
+
