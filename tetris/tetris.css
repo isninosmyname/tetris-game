@@ -20,10 +20,10 @@ body {
     }
     
     #gameArea {
-        width: 40px; /* Ancho del área de juego */
-        height: 20px; /* Alto del área de juego */
-        border: 20px solid #000; /* Borde del área de juego */
-        background-color: #ffffff; /* Color de fondo del área de juego */
+        width: 40px; 
+        height: 20px;
+        border: 20px solid #000; 
+        background-color: #ffffff; 
     }
     
     #score {
@@ -34,4 +34,5 @@ body {
     
     font-size: 20px;
 }
+
 
