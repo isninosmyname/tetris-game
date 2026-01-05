@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #000000;
+    font-family: Arial, sans-serif;
+}
+#score {
+    text-align: center;
+    margin-top: 20px;body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #00000000;
+        font-family: Arial, sans-serif;
+    }
+    
+    #gameArea {
+        width: 40px; /* Ancho del área de juego */
+        height: 20px; /* Alto del área de juego */
+        border: 20px solid #000; /* Borde del área de juego */
+        background-color: #ffffff; /* Color de fondo del área de juego */
+    }
+    
+    #score {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+    
+    font-size: 20px;
+}
